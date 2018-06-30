@@ -22,7 +22,7 @@ take several houers
  Tensorflow
  https://www.tensorflow.org/install/install_linux
  Pitfall 3. replace command 
- '$ sudo apt-get install cuda-command-line-tools'
+ '''$ sudo apt-get install cuda-command-line-tools'''
  do instead
  '$ sudo apt-get install cuda-command-line-tools-9-0'
  Pitfall 4. replace command 
