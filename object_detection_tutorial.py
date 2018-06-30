@@ -1,13 +1,7 @@
-
-# coding: utf-8
-
-# # Object Detection Demo
-# Welcome to the object detection inference walkthrough!  This notebook will walk you step by step through the process of using a pre-trained model to detect objects in an image. Make sure to follow the [installation instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md) before you start.
-
-# # Imports
-
-# In[23]:
-
+#Copyed and modify to read a video.avi instead of the .jpg files from Note need OpenCV installed also
+#https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb
+#from this repository
+#https://github.com/tensorflow/models/tree/master/research/object_detection
 
 import numpy as np
 import os
@@ -16,12 +10,10 @@ import sys
 import tarfile
 import tensorflow as tf
 import zipfile
-import cv2
+import cv2 #Use OpenCV instead of Matplot
 
 from collections import defaultdict
 from io import StringIO
-#from matplotlib import pyplot as plt
-#from PIL import Image
 
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
@@ -30,21 +22,10 @@ from object_detection.utils import ops as utils_ops
 if tf.__version__ < '1.4.0':
   raise ImportError('Please upgrade your tensorflow installation to v1.4.* or later!')
 
-
-# ## Env setup
-
-# In[24]:
-
-
-# This is needed to display the images.
-# get_ipython().magic(u'matplotlib inline')
-
-
 # ## Object detection imports
 # Here are the imports from the object detection module.
 
 # In[25]:
-
 
 from utils import label_map_util
 
@@ -80,7 +61,8 @@ NUM_CLASSES = 90
 
 # In[27]:
 
-
+#You could remove this if you already have download the model once in your working folder
+print('Now load model from internet take some time...')
 opener = urllib.request.URLopener()
 opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
 tar_file = tarfile.open(MODEL_FILE)
@@ -94,8 +76,6 @@ for file in tar_file.getmembers():
 
 # In[28]:
 
-
-
 detection_graph = tf.Graph()
 with detection_graph.as_default():
   od_graph_def = tf.GraphDef()
@@ -104,12 +84,10 @@ with detection_graph.as_default():
     od_graph_def.ParseFromString(serialized_graph)
     tf.import_graph_def(od_graph_def, name='')
 
-
 # ## Loading label map
 # Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
 
 # In[29]:
-
 
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
@@ -119,7 +97,6 @@ category_index = label_map_util.create_category_index(categories)
 # ## Helper code
 
 # In[30]:
-
 
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
@@ -131,17 +108,16 @@ def load_image_into_numpy_array(image):
 
 # In[31]:
 
-
+# Olle node: not use this now when use video. instead
 # For the sake of simplicity we will use only 2 images:
 # image1.jpg
 # image2.jpg
 # If you want to test the code with your images, just add path to the images to the TEST_IMAGE_PATHS.
-PATH_TO_TEST_IMAGES_DIR = 'test_images'
-TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, 6) ]
+#PATH_TO_TEST_IMAGES_DIR = 'test_images'
+#TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, 6) ]
 
 # Size, in inches, of the output images.
 IMAGE_SIZE = (12, 8)
-
 
 # In[32]:
 
@@ -192,7 +168,6 @@ def run_inference_for_single_image(image, graph):
 
 
 # In[33]:
-#cap = cv2.VideoCapture('test.mp4')
 print('Try open a video with name video.avi')
 cap = cv2.VideoCapture('video.avi')
 with detection_graph.as_default():
@@ -226,18 +201,7 @@ with detection_graph.as_default():
           use_normalized_coordinates=True,
           line_thickness=8)
 
-      #plt.figure(figsize=IMAGE_SIZE)
-      #plt.imshow(image_np)
-     # image_cv = cv2.resize (image_np, (800, 600))
-    #  image_cv = image_np
-      #destRGB = cv2.cvtColor(srcBGR, cv2.COLOR_BGR2RGB)
-      #image_cv = cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB)
 
       #cv2.imshow("detection window", image_cv)
       cv2.imshow('object detection', cv2.resize(image_np, (160,120)))
       cv2.waitKey(1)
-
-# In[34]:
-
-
-#run all
