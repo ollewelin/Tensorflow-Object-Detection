@@ -81,20 +81,20 @@ NUM_CLASSES = 90
 # In[27]:
 
 
-#opener = urllib.request.URLopener()
-#opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
-#tar_file = tarfile.open(MODEL_FILE)
-#for file in tar_file.getmembers():
-#  file_name = os.path.basename(file.name)
-#  if 'frozen_inference_graph.pb' in file_name:
-#    tar_file.extract(file, os.getcwd())
+opener = urllib.request.URLopener()
+opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
+tar_file = tarfile.open(MODEL_FILE)
+for file in tar_file.getmembers():
+  file_name = os.path.basename(file.name)
+  if 'frozen_inference_graph.pb' in file_name:
+    tar_file.extract(file, os.getcwd())
 
 
 # ## Load a (frozen) Tensorflow model into memory.
 
 # In[28]:
 
-print('Hej1')
+
 
 detection_graph = tf.Graph()
 with detection_graph.as_default():
@@ -193,7 +193,8 @@ def run_inference_for_single_image(image, graph):
 
 # In[33]:
 #cap = cv2.VideoCapture('test.mp4')
-cap = cv2.VideoCapture('persion.avi')
+print('Try open a video with name video.avi')
+cap = cv2.VideoCapture('video.avi')
 with detection_graph.as_default():
   with tf.Session() as sess:
 
