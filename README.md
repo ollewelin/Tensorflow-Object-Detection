@@ -22,16 +22,16 @@ take several houers
  Tensorflow
  https://www.tensorflow.org/install/install_linux
  Pitfall 3. replace command 
- '''$ sudo apt-get install cuda-command-line-tools'''
+`$ sudo apt-get install cuda-command-line-tools`
  do instead
- '$ sudo apt-get install cuda-command-line-tools-9-0'
+ `$ sudo apt-get install cuda-command-line-tools-9-0`
  Pitfall 4. replace command 
- '(tensorflow) olle@olle-Aspire-M3800:~/tensorflow/tensorflow$ pip install --upgrade tensorflow-gpu'
+ `(tensorflow) olle@olle-Aspire-M3800:~/tensorflow/tensorflow$ pip install --upgrade tensorflow-gpu`
  with 
- '$(tensorflow) olle@olle-Aspire-M3800:~/tensorflow/tensorflow$ pip install --upgrade tensorflow-gpu==1.8.0.'
+ `$(tensorflow) olle@olle-Aspire-M3800:~/tensorflow/tensorflow$ pip install --upgrade tensorflow-gpu==1.8.0.`
  when testing Tensorflow installation
 
-'$ sudo apt-get install python-opencv'
+`$ sudo apt-get install python-opencv`
 
  I was follow the installation from the 
  https://github.com/tensorflow/models/tree/master/research/object_detection
