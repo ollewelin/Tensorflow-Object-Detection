@@ -43,3 +43,5 @@ take several houers
  put a video.avi file in the working folder
  
  python object_detection_tutorial.py
+ 
+ https://www.youtube.com/watch?v=j9EDPkt-_H8
